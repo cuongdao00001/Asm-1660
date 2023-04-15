@@ -1,0 +1,65 @@
+﻿@model Idea1.Models.Topic
+
+@{
+    ViewBag.Title = "Create";
+}
+<hr />
+<h1 class="text-center">Create to Topic</h1>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form">
+    <div class="form-horizontal">
+        <h4 class="text-center">New Topic</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="FirstDate">First Date</label>
+            <input class="form-control" type="datetime-local" data-val="true" data-val-required="The FirstDate field is required." id="FirstDate" name="FirstDate" value="" />
+            <span class="text-danger field-validation-valid" data-valmsg-for="FirstDate" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="LastDate">Last Date</label>
+            <input class="form-control" type="datetime-local" data-val="true" data-val-required="The LastDate field is required." id="LastDate" name="LastDate" value="" />
+            <span class="text-danger field-validation-valid" data-valmsg-for="LastDate" data-valmsg-replace="true"></span>
+        </div>
+
+        <hr />
+
+        <div class=" form-group text-center">
+            <input type="submit" value="Create" class="btn btn-primary" />
+
+            <button class="btn btn-danger" onclick="location.href='@Url.Action( "Index")'">Back to Topics</button>
+
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    .form {
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 425px;
+        background-color: #FDF5E6;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px 0 rgba(#999, .25);
+        padding: .75rem;
+    }
+</style>

@@ -1,0 +1,69 @@
+﻿@model Idea1.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">@ViewBag.Title</h2>
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "needs-validation", novalidate = "" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="mb-3">
+                            <label for="Input_Email" class="form-label">Email address</label>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "Input_Email", required = "required" })
+                            <div class="invalid-feedback">
+                                Please enter your email address.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Input_Password" class="form-label">Password</label>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Input_Password", required = "required" })
+                            <div class="invalid-feedback">
+                                Please enter your password.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Input_ConfirmPassword" class="form-label">Confirm password</label>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "Input_ConfirmPassword", required = "required" })
+                            <div class="invalid-feedback">
+                                Please confirm your password.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Input_DepartmentId" class="form-label">Department</label>
+                            @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.Departments, "Value", "Text"), "Choose department", new { @class = "form-select", id = "Input_DepartmentId", required = "required" })
+                            <div class="invalid-feedback">
+                                Please choose your department.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), "Select", new { @class = "form-control" })
+                                <div class="invalid-feedback">
+                                    Please choose your role.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

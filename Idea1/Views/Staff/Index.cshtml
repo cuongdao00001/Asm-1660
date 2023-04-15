@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Idea1.Models.Topic>
+
+@{
+
+
+    ViewBag.Title = "Staff Submission";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var now = DateTime.Now;
+
+}
+<hr />
+
+
+<h1 class="text-center">Staff Submission</h1>
+
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDate)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        var lastDate = item.LastDate;
+        var firtsDate = item.FirstDate;
+
+
+        <tr style="@(firtsDate >= now ? "background-color: #8FBC8F;" : lastDate >= now ? "background-color: #FFFF7F;" : "background-color: #FF7F7F;")">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastDate)
+            </td>
+            <td>
+                @if (firtsDate >= now)
+                {
+                    <button class="btn btn-success" onclick="location.href='@Url.Action("Index", "Ideas", new { topicId = item.TopicId })'">View Idea</button>
+
+
+                }
+                else if (lastDate >= now)
+                {
+                    <button class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Ideas", new { topicId = item.TopicId })'">View Idea</button>
+
+                }
+                else
+                {
+                    <button class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Ideas", new { topicId = item.TopicId })'">View Idea</button>
+
+                }
+
+
+                @if (User.IsInRole("QA Manager"))
+                {
+                    <button class="btn btn-warning">
+
+                        @Html.ActionLink("ExportExcel", "ExportExcel", "Ideas", new { id = item.Ideas })
+                    </button>
+                        <button class="btn btn-info">
+                            @Html.ActionLink("ExportZip", "ExportZip", "Ideas", new { id = item.Ideas })
+                        </button>
+                        }
+
+
+                </td>
+
+        </tr>
+    }
+</table>
+
+
+<style>
+    .table {
+        background: #FDEEE3;
+        border-radius: 12px;
+        padding: 10px;
+        color: #3d155f;
+    }
+
+    .text-center {
+        color: #3d155f;
+    }
+</style>

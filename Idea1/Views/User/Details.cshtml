@@ -1,0 +1,137 @@
+﻿@model Idea1.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+    <hr />
+
+    <h1 class="mt-4 mb-4 text-center">Details to User </h1>
+    <hr />
+    <div class="form-horizontal">
+        <h2 class="infor">Details: "@Model.Name"</h2>
+        <hr />
+        <div class="row">
+            <div class="col-12 col-lg-6 pl-4 pr-4 mt-5 ">
+                <table class="table ">
+                    <thead class="table-striped bg-info text-center">
+                        <tr>
+                            <th colspan="2">
+                                Account Informations
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(model => model.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Email
+                            </th>
+                            <td>
+                                @Html.DisplayFor(model => model.Name)
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Email Confirmed
+                            </th>
+                            <td>
+                                @Html.DisplayFor(model => model.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Password
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Others
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-lg-6 pl-4 pr-4 mt-5">
+                <table class="table ">
+                    <thead class="table-striped bg-success text-center">
+                        <tr>
+                            <th colspan="2">
+                                Profile
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                FullName
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Gender
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Birthday
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Phone Number
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Address
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <hr />
+        <div class="text-center">
+            <button class="btn btn-primary" onclick="location.href='@Url.Action( "Edit", new { id = Model.UserId })'">Edit</button>
+            <button class="btn btn-danger" onclick="location.href='@Url.Action( "Index")'">Back to Users</button>
+        </div>
+        <hr />
+    </div>
+</div>
+<style>
+    .table {
+        border: 2px solid;
+        border-radius: 10px;
+        background: #FDEEE3;
+    }
+    .infor{
+        text-align:center;
+        color:#f10707;
+    }
+
+</style>

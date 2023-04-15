@@ -1,0 +1,197 @@
+﻿@model IEnumerable<Idea1.Models.Idea>
+
+@{
+    ViewBag.Title = "Index";
+    var topicId = ViewBag.TopicId;
+    var canAddIdea = ViewBag.CanAddIdea ?? false;
+    var firtDate = ViewBag.TopicFirstDate;
+    var lastDate = ViewBag.TopicLastDate;
+    var now = DateTime.Now;
+    string iconClass = "";
+    if (ViewBag.IconClass == "fa-sort-desc")
+    {
+        iconClass = "fa-sort-asc";
+    }
+    else
+    {
+        iconClass = "fa-sort-desc";
+    }
+    <link rel="stylesheet" href="PageList.css">
+
+}
+<hr />
+<h1 class="align-text-top text-break text-center"> <i class="fa fa-lightbulb-o" aria-hidden="true"></i> List of Idea</h1>
+<hr />
+
+@if (TempData["StatusMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["StatusMessage"]</div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Topic Title
+        </th>
+        <th>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+
+            First Date
+        </th>
+        <th>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+
+            Last Date
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @ViewBag.TopicTitle
+        </td>
+        <td>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+
+            @ViewBag.TopicFirstDate
+        </td>
+        <td>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+
+            @ViewBag.TopicLastDate
+        </td>
+    </tr>
+</table>
+<hr />
+
+<p class="text-center">
+    @if (firtDate >= now)
+    {
+        @Html.ActionLink("Create to Idea", "Create", new { id = topicId }, new { @class = "btn btn-success" })
+    }
+    else if (lastDate >= now)
+    {
+        @Html.ActionLink("Create to Idea", "Create", new { id = topicId }, new { @class = "btn btn-success", style = "display:none;" })
+    }
+</p>
+
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brief)
+        </th>
+        <th>
+            @Html.ActionLink("Views", "Index", new { topicId = ViewBag.TopicId, SortColumn = "Views", IconClass = iconClass }, new { @class = " text-primary " })
+            @if (ViewBag.SortColumn == "Views")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th>
+            @Html.ActionLink("Like", "Index", new { topicId = ViewBag.TopicId, SortColumn = "Like", IconClass = iconClass }, new { @class = "text-primary" })
+            @if (ViewBag.SortColumn == "Like")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        <th>
+            @Html.ActionLink("Dislike", "Index", new { topicId = ViewBag.TopicId, SortColumn = "Dislike", IconClass = iconClass }, new { @class = "text-primary" })
+            @if (ViewBag.SortColumn == "Dislike")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var idea in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => idea.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => idea.Brief)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => idea.Views)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => idea.Like)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => idea.Dislike)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "Ideas", new { id = idea.IdeaId })" class="btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i> Details</a>
+                <a class="btn btn-primary" href="@Url.Action("Like", new { id = idea.IdeaId })"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</a>
+                <a class="btn btn-danger" href="@Url.Action("Dislike", new { id = idea.IdeaId })"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Dislike</a>
+            </td>
+        </tr>
+    }
+</table>
+<div class="pagination">
+    @if (ViewBag.Page > 1)
+    {
+        <a href="@Url.Action("Index", "Ideas", new { topicId = ViewBag.TopicId, page = ViewBag.Page - 1 })" class="page-link">&laquo; Previous</a>
+    }
+
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        if (i == ViewBag.Page)
+        {
+            <a href="@Url.Action("Index", "Ideas", new { topicId = ViewBag.TopicId, page = i })" class="page-link">@i</a>
+
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Ideas", new { topicId = ViewBag.TopicId, page = i })" class="page-link">@i</a>
+        }
+    }
+
+    @if (ViewBag.Page < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", "Ideas", new { topicId = ViewBag.TopicId, page = ViewBag.Page + 1 })" class="page-link">Next &raquo;</a>
+    }
+</div>
+<style>
+    .table {
+        background: #FDEEE3;
+        border-radius: 12px;
+        padding: 10px;
+        color: #3d155f;
+    }
+
+    .text-center {
+        color: #3d155f;
+    }
+
+    .pagination {
+        display: flex;
+        border-radius: 12px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            color: #333;
+            display: inline-block;
+            border-radius: 12px;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+            .pagination a:hover {
+                background-color: #FDEEE3;
+            }
+
+        .pagination .active {
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>

@@ -1,0 +1,100 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 12px;
+    padding-right: 0px;
+    padding: .5rem 1rem;
+    background-image: url('https://art.pixilart.com/c4eb5083282b3eb.png');
+    border-radius: 10px;
+    height: 1000px;
+    width: 1200px;
+    border-radius: 20px;
+}
+
+.table {
+    background: #FDEEE3;
+    border-radius: 12px;
+    padding: 10px;
+    color: #3d155f;
+}
+
+.text-center {
+    color: #3d155f;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.post > h2, .post > div {
+    background: #EEE;
+    padding: 10px;
+    margin: 0;
+}
+
+.post > h2 {
+    margin-top: 15px;
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+}
+
+.navbar {
+    height: 80px;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 18px;
+}
+
+.dropdown-menu {
+    background-color: #343a40;
+}
+
+.dropdown-item {
+    color: #fff;
+}
+
+    .dropdown-item:hover {
+        background-color: #0069d9;
+    }
+
+body {
+    margin: 0px;
+    padding: 0;
+    background-color: #eec4c4;
+    height: 100vh;
+    border-radius: 50px;
+}
+.form-horizontal {
+    background: #FDEEE3;
+    border-radius: 12px;
+    padding: 10px;
+    color: #3d155f;
+
+}
+.dl-horizontal{
+        text-align: center;
+
+}
+

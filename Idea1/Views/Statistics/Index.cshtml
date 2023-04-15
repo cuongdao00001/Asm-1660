@@ -1,0 +1,220 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+
+    <h1 class=" text-center">Statistics of Ideas App</h1>
+    <hr />
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Bar Chart: Idea by Department</strong>
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="bar1"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Pie Chart: Ideas by Department</strong>
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="pie"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Bar Chart: UserCount by Department</strong>
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="bar"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Bar Chart: IdeaCount by Category</strong>
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="bar2"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script>
+    $(function () {
+
+
+         // Show Idea + Department
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("IdeaByDepartment")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            var labels = data[0];
+            var values = data[1];
+            var colors = ['rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'];
+                var ctx = document.getElementById("bar1");
+                var bar1 = new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: labels,
+            datasets: [{
+            backgroundColor: colors,
+            data: values
+            }]
+            },
+            options: {
+            title: {
+            display: true,
+            text: 'Idea by Department'
+            }
+            }
+            });
+            },
+            error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            }
+            });
+
+
+         // Show Ideas + Department
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("UserCountByDepartment")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            var labels = data[0];
+            var values = data[1];
+            var colors = ['rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'];
+            var ctx = document.getElementById("bar");
+            var bar = new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: labels,
+            datasets: [{
+            backgroundColor: colors,
+            data: values
+            }]
+            },
+            options: {
+            title: {
+            display: true,
+            text: 'User by Department'
+            }
+            }
+            });
+            },
+            error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            }
+            });
+
+            // Show Ideas + Departments
+
+            $.ajax({
+            type: "GET",
+            url: "@Url.Action("ideaCountByDepartment")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            var labels = data[0];
+            var values = data[1];
+            var colors = ['rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'];
+            var ctx = document.getElementById("pie");
+                var pie = new Chart(ctx, {
+            type: 'pie',
+            data: {
+            labels: labels,
+            datasets: [{
+            backgroundColor: colors,
+            data: values
+            }]
+            },
+            options: {
+            title: {
+            display: true,
+            text: ' Idea by Department'
+            }
+            }
+            });
+            },
+            error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            }
+            });
+
+
+            // Show Ideacount + Category
+
+            $.ajax({
+            type: "GET",
+            url: "@Url.Action("IdeaCountByCategory")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            var labels = data[0];
+            var values = data[1];
+            var colors = ['rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'];
+            var ctx = document.getElementById("bar2");
+            var bar2 = new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: labels,
+            datasets: [{
+            backgroundColor: colors,
+            data: values
+            }]
+            },
+            options: {
+            title: {
+            display: true,
+            text: 'Idea Count by Category'
+            }
+            }
+            });
+            },
+            error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            }
+            });
+            });
+</script>

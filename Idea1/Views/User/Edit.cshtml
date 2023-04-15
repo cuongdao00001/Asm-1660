@@ -1,0 +1,133 @@
+﻿@model Idea1.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    <h1 class="mt-4 mb-4 text-center">
+        <i class="fa fa-address-book-o" aria-hidden="true"></i>
+        Edit to user
+    </h1>
+    <hr />
+
+    <div class="forml">
+        <h1 class="infor">Edit: @Model.Name </h1>
+        <a id="create" class="btn btn-secondary" href="/User/Index">Edit</a>
+        <a id="create" class="btn btn-primary" href="/User/Index">Back to User</a>
+        <p></p>
+    </div>
+
+    <hr />
+    <div class="g-grid">
+
+        <div class="g-grid-col">
+            <h5 class="mb-4">Account Information</h5>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password:</label>
+                <input type="text" class="form-control" id="Password" name="Password" placeholder="Enter your Password">
+            </div>
+            <div class="form-group">
+                <label for="Email">Email:</label>
+                <input type="text" class="form-control" id="Email" name="Email" placeholder="Enter your Email">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="LockoutEnd">Lockout End</label>
+                <input class="form-control" type="text" id="LockoutEnd" name="LockoutEnd" value="" />
+                <span class="text-danger field-validation-valid" data-valmsg-for="LockoutEnd" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="LockoutEnabled">Lockout Enabled</label>
+                <input class="form-control" type="checkbox" checked="checked" data-val="true" data-val-required="The LockoutEnabled field is required." id="LockoutEnabled" name="LockoutEnabled" value="true" />
+                <span class="text-danger field-validation-valid" data-valmsg-for="LockoutEnabled" data-valmsg-replace="true"></span>
+            </div>
+
+        </div>
+        <div class="g-grid-col">
+            <h5 class="mb-4">Profile</h5>
+            <hr />
+            <div class="form-group">
+                <label for="FullName">FullName:</label>
+                <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Enter your FullName">
+            </div>
+
+            <div class="form-group">
+                <label for="PhoneNumber">PhoneNumber:</label>
+                <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="Enter your PhoneNumber">
+            </div>
+            <div class="form-group">
+                <label for="Birthday">Birthday</label>
+                <input class="form-control" type="datetime-local" id="Birthday" name="Birthday" value="" />
+                <span class="text-danger field-validation-valid" data-valmsg-for="Birthday" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select class="form-control" id="Gender" name="Gender">
+                    <option value="0">Female</option>
+                    <option value="1">Male</option>
+                </select>
+                <span class="text-danger field-validation-valid" data-valmsg-for="Gender" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Address">Address:</label>
+                <input type="text" class="form-control" id="Address" name="Address" placeholder="Enter your Address">
+            </div>
+
+            <div class="form-group">
+                <label for="Other">Other:</label>
+                <input type="text" class="form-control" id="Other" name="Other" placeholder="Enter your Other">
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .infor {
+        text-align: center;
+        color: #f10707;
+    }
+
+    .forml {
+        text-align: center;
+        background-color: #FDEEE3;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        margin: 50px
+    }
+    .g-grid {
+        display: grid;
+        /* W(adjusted) = W(individual) - (1rem * 1/2) */
+        grid-template-columns: calc(50% - (30px * 1/2)) calc(50% - (30px * 1/2));
+        grid-column-gap: 30px;
+    }
+
+    .g-grid-col {
+        padding: 30px;
+        background-color: #FDEEE3;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        color: #3d155f;
+    }
+</style>

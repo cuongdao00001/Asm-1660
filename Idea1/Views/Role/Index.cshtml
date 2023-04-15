@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Idea1.Models.Role>
+
+@{
+    ViewBag.Title = "Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+
+<h1 class="text-center">List to Role</h1>
+<hr />
+
+<p class="text-center">
+    <button class="btn btn-success" onclick="location.href='@Url.Action( "Create")'">Create</button>
+</p>
+
+<table class="table text-center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = item.RoleID })'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                <button class="btn btn-secondary" onclick="location.href='@Url.Action( "Details", new { id = item.RoleID })'"><i class="fa fa-info" aria-hidden="true"></i> Details</button>
+                <button class="btn btn-danger" onclick="location.href='@Url.Action( "Delete", new { id = item.RoleID })'"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+            </td>
+        </tr>
+    }
+
+</table>

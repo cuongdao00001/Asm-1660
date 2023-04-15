@@ -1,0 +1,42 @@
+﻿@model Idea1.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+<hr />
+
+<h1 class="text-center">Details of Category</h1>
+<hr />
+<div class="form">
+    <div class="form-horizontal">
+        <h4 class="text-center">Detail: @Model.Name </h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <hr />
+            <dd>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action( "Edit", new { id = Model.CategoryId })'">Edit</button>
+                <button class="btn btn-danger" onclick="location.href='@Url.Action( "Index")'">Back to Category</button>
+            </dd>
+        </dl>
+    </div>
+</div>
+<style>
+    .form {
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 425px;
+        background-color: #FDF5E6;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px 0 rgba(#999, .25);
+        padding: .75rem;
+    }
+</style>

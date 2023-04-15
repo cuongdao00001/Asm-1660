@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNet.Identity;
+
+
+@model IEnumerable<Idea1.Models.Idea>
+
+@{
+    ViewBag.Title = "ViewAllIdea";
+}
+
+<hr />
+<h1 class="align-text-top text-break text-center"> <i class="fa fa-cogs" aria-hidden="true"></i> List of Edit to Idea</h1>
+<hr />    
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var idea in Model)
+        {
+            <tr>
+                <td>@idea.Title</td>
+                <td>@idea.Topic.Title</td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.Identity.GetUserId() == idea.UserId)
+                    {
+                        <a class="btn btn-secondary" href="@Url.Action("Edit", "ViewAllIdea", new { id = idea.IdeaId })">Edit</a>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", "ViewAllIdea", new { id = idea.IdeaId })"> Delete </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
