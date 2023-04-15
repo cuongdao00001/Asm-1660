@@ -54,10 +54,11 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.CategoryId, new { @class = "control-label" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.CategoryId, ViewBag.Categories as SelectList, "- Select Categories -", new { @class = "form-control" })
+                <div class="mb-3">
+                    <label for="Input_CategoryId" class="form-label">CategoryId</label>
+                    @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.CategoryId, "Value", "Text"), "- Select Topic -", new { @class = "form-select", id = "Input_CategoryId", required = "required" })
+                    <div class="invalid-feedback">
+                        Please choose your CategoryId.
                     </div>
                 </div>
 
